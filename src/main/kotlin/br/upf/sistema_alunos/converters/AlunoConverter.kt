@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component
 
 @Component
 class AlunoConverter {
-
     fun toAluno(dto: AlunoDTO): Aluno {
         return Aluno(
             nome = dto.nome,
