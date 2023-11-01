@@ -5,6 +5,8 @@ import br.upf.sistema_alunos.dto.AlunoResponseDTO
 import br.upf.sistema_alunos.exceptions.NotFoundException
 import br.upf.sistema_alunos.repository.AlunoRepository
 import org.springframework.stereotype.Service
+import kotlin.jvm.optionals.getOrElse
+import kotlin.jvm.optionals.getOrNull
 
 private const val ALUNO_NOT_FOUND_MESSAGE = "Aluno não encontrado!"
 
@@ -19,8 +21,8 @@ class AlunoService(
     }
     fun buscarPorId(id: Long): AlunoResponseDTO? {
         val aluno = repository.findById(id)
-        return null
-       //return converter.toAlunoResponseDTO(aluno)
+        //return null
+       return converter.toAlunoResponseDTO(aluno.getOrElse { throw  NotFoundException("Não encontrado") })
     }
     fun cadastrar(dto: AlunoDTO): AlunoResponseDTO {
         return converter.toAlunoResponseDTO(
